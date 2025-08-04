@@ -21,7 +21,8 @@ const path = require("path");
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:5173", // Fixed to match your frontend
+    origin: "https://triply-gamma.vercel.app",
+    // origin: "http://localhost:5173", // Fixed to match your frontend
     credentials: true
 }));
 
