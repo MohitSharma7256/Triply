@@ -23,7 +23,10 @@ const createPlaceholderImage = (width = 400, height = 300, text = 'No Image') =>
 
 // Get the correct image URL based on environment
 export const getImageUrl = (imageUrl) => {
-  if (!imageUrl) return createPlaceholderImage();
+  // Handle null, undefined, or non-string values
+  if (!imageUrl || typeof imageUrl !== 'string') {
+    return createPlaceholderImage();
+  }
   
   // If it's already a full URL (starts with http), return as is
   if (imageUrl.startsWith('http')) {
