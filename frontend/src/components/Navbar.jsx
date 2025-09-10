@@ -11,7 +11,7 @@ const Navbar = ({
   handleSearch,
   handleClearSearch
 }) => {
-  const isToken = localStorage.getItem("accessToken");
+  const isToken = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const onLogout = () => {

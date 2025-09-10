@@ -28,7 +28,7 @@ const Login = () => {
 
       if (response.data && response.data.accessToken) {
         // Store token with the correct key name
-        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("token", response.data.accessToken);
 
         // Redirect to dashboard
         navigate("/dashboard");

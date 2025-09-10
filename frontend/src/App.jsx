@@ -4,15 +4,12 @@ import React from 'react'
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import Home from "./pages/Home/Home";
+import { isAuthenticated } from "./utils/authUtils";
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import FutureTrips from "./pages/FutureTrips/FutureTrips";
 import About from "./pages/Home/About";
-
-
-
-
 
 const App = () => {
   return (
@@ -33,11 +30,11 @@ const App = () => {
 
 // Define the root component to handle the initial redirect
 const Root = () => {
-  // check if token exists in localStorage
-  const isAuthenticated = !!localStorage.getItem("token");
+  // Use the authentication utility
+  const authenticated = isAuthenticated();
 
-  // Redirect to dashboadr if authenticated, otherwise to login 
-  return isAuthenticated ? (
+  // Redirect to dashboard if authenticated, otherwise to login 
+  return authenticated ? (
     <Navigate to="/dashboard" />
   ) : (
     <Navigate to="/login" />

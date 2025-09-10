@@ -33,7 +33,7 @@ const Signup = () => {
       if (response.data && response.data.success) {
         // Store the token with the correct key name
         if (response.data.accessToken) {
-          localStorage.setItem("accessToken", response.data.accessToken);
+          localStorage.setItem("token", response.data.accessToken);
         }
 
         // Redirect to dashboard
