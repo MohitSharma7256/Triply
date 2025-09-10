@@ -15,8 +15,13 @@ const TravelStoryCard = ({
   onClick,
   onFavouriteClick
 }) => {
+  // Debug logging for image URL
+  console.log('TravelStoryCard - Raw imgUrl:', imgUrl);
+  console.log('TravelStoryCard - Processed URL:', imgUrl ? getImageUrl(imgUrl) : 'No image');
+
   // Handle image loading errors with local fallback
   const handleImageLoadError = (e) => {
+    console.log('Image load error for URL:', e.target.src);
     handleImageError(e, 'Story Image');
   };
 

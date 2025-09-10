@@ -417,7 +417,7 @@ const Home = () => {
                       className="transform transition-all duration-300"
                     >
                       <TravelStoryCard
-                        imgUrl={item.imageUrl}
+                        imgUrl={Array.isArray(item.imageUrl) ? item.imageUrl[0] : item.imageUrl}
                         title={item.title}
                         story={item.story}
                         date={item.visitedDate}
