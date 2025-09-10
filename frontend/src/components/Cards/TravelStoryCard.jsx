@@ -2,6 +2,7 @@ import React from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { GrMapLocation } from 'react-icons/gr';
 import moment from 'moment';
+import { getImageUrl, handleImageError, createPlaceholder } from '../../utils/imageUtils';
 
 const TravelStoryCard = ({
   imgUrl,
@@ -14,11 +15,9 @@ const TravelStoryCard = ({
   onClick,
   onFavouriteClick
 }) => {
-  // Handle image loading errors
-  const handleImageError = (e) => {
-    e.target.onerror = null;
-    e.target.src = 'https://via.placeholder.com/400x300?text=No+Image';
-    e.target.className = 'w-full h-60 object-contain bg-gray-100 cursor-pointer';
+  // Handle image loading errors with local fallback
+  const handleImageLoadError = (e) => {
+    handleImageError(e, 'Story Image');
   };
 
   // Format the story snippet
@@ -40,11 +39,11 @@ const TravelStoryCard = ({
       <div className="w-full h-60 bg-gray-100 overflow-hidden">
         {imgUrl ? (
           <img
-            src={imgUrl}
+            src={getImageUrl(imgUrl)}
             alt={title}
             className="w-full h-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
             onClick={onClick}
-            onError={handleImageError}
+            onError={handleImageLoadError}
             loading="lazy"
           />
         ) : (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdDeleteOutline, MdUpdate, MdClose } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import { getImageUrl, handleImageError } from '../../utils/imageUtils';
 
 const ViewTravelStory = ({ 
   storyInfo = {},
@@ -93,12 +94,11 @@ const ViewTravelStory = ({
         {imageUrl && (
           <div className="rounded-lg overflow-hidden flex justify-center bg-gray-100 min-h-[200px]">
             <img 
-              src={imageUrl} 
+              src={getImageUrl(imageUrl)} 
               alt={title} 
               className="max-h-[400px] w-auto object-contain"
               onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/600x400?text=Image+Not+Available';
+                handleImageError(e, 'Image Not Available');
               }}
             />
           </div>

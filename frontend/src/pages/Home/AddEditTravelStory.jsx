@@ -122,6 +122,7 @@ const AddEditTravelStory = ({
 
       const method = type === "edit" ? "put" : "post";
 
+      console.log("Sending request:", { method, endpoint, storyData }); // Debug log
       const response = await axiosInstance[method](endpoint, storyData);
 
       if (response.data?.story || response.data?.data) {

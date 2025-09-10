@@ -185,12 +185,16 @@ app.put("/edit-travel-story/:id", authenticateToken, async (req, res) => {
     const { title, story, visitedLocation, imageUrl, visitedDate, isFavourite } = req.body;
     const userId = req.user?.userId;
 
+    console.log("Edit request - ID:", id, "UserID:", userId); // Debug log
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.log("Invalid ObjectId:", id); // Debug log
         return res.status(400).json({ error: true, message: "Invalid story ID" });
     }
 
     try {
         const travelStory = await TravelStory.findOne({ _id: id, userId });
+        console.log("Found story:", !!travelStory); // Debug log
 
         if (!travelStory) {
             return res.status(404).json({
