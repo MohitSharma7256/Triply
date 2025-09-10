@@ -1,4 +1,6 @@
-require("dotenv").config();
+// Load environment configuration
+const { loadEnvironment } = require('./environment');
+loadEnvironment();
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -21,13 +23,16 @@ const path = require("path");
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: "https://triply-gamma.vercel.app",
-    // origin: "http://localhost:5173", // Fixed to match your frontend
+    origin: [
+        "https://triply-frontend.onrender.com", // Production frontend URL
+        "http://localhost:3000", // Local development
+        "http://localhost:5173"  // Vite dev server default
+    ],
     credentials: true
 }));
 
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/travel-story-app";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://Mohit:uXDskTF9VKGzeWGY@cluster0.aqgwjgh.mongodb.net/Triply";
 
 mongoose.connect(MONGODB_URI)
     .then(() => console.log("✅ MongoDB connected"))

@@ -8,7 +8,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "prod": "NODE_ENV=production node index.js",
+    "migrate": "node migrate-data.js migrate",
+    "test-atlas": "node migrate-data.js test"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
