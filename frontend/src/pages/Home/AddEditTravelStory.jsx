@@ -15,10 +15,10 @@ const AddEditTravelStory = ({
 }) => {
   const [title, setTitle] = useState(storyInfo.title || "");
   const [imageUrls, setImageUrls] = useState(
-    Array.isArray(storyInfo.imageUrl) 
-      ? storyInfo.imageUrl 
-      : storyInfo.imageUrl 
-        ? [storyInfo.imageUrl] 
+    Array.isArray(storyInfo.imageUrl)
+      ? storyInfo.imageUrl
+      : storyInfo.imageUrl
+        ? [storyInfo.imageUrl]
         : []
   );
   const [story, setStory] = useState(storyInfo.story || "");
@@ -26,8 +26,8 @@ const AddEditTravelStory = ({
     Array.isArray(storyInfo.visitedLocation)
       ? storyInfo.visitedLocation
       : storyInfo.visitedLocation
-      ? [storyInfo.visitedLocation]
-      : []
+        ? [storyInfo.visitedLocation]
+        : []
   );
   const [visitedDate, setVisitedDate] = useState(storyInfo.visitedDate || null);
   const [error, setError] = useState("");
@@ -36,19 +36,19 @@ const AddEditTravelStory = ({
 
   const handleAddImages = useCallback(async (files) => {
     if (!files || files.length === 0) return;
-    
+
     setIsUploading(true);
     try {
       const uploadPromises = Array.from(files).map(async (file) => {
         const formData = new FormData();
         formData.append('image', file);
-        
+
         const response = await axiosInstance.post('/image-upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
-        
+
         return response.data.imageUrl;
       });
 
@@ -150,9 +150,9 @@ const AddEditTravelStory = ({
   ]);
 
   return (
-    <div className="relative p-6 bg-white rounded-lg shadow-md w-full h-[600px] overflow-y-auto">
-      <div className="flex items-center justify-between mb-6">
-        <h5 className="text-2xl font-semibold text-gray-800">
+    <div className="relative p-4 md:p-6 bg-white rounded-lg shadow-md w-full max-h-[90vh] md:h-[600px] overflow-y-auto">
+      <div className="flex items-center justify-between mb-4 md:mb-6">
+        <h5 className="text-xl md:text-2xl font-semibold text-gray-800">
           {type === "add" ? "Add New Story" : "Edit Story"}
         </h5>
         <button
@@ -205,7 +205,7 @@ const AddEditTravelStory = ({
           />
 
           {imageUrls.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
               {imageUrls.map((imageUrl, index) => (
                 <div key={index} className="relative group">
                   <img
@@ -215,7 +215,7 @@ const AddEditTravelStory = ({
                   />
                   <button
                     onClick={() => handleDeleteImage(index)}
-                    className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100"
+                    className="absolute top-1 right-1 p-1.5 md:p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors opacity-100 md:opacity-0 md:group-hover:opacity-100"
                   >
                     <MdDeleteOutline className="text-sm" />
                   </button>
@@ -230,14 +230,14 @@ const AddEditTravelStory = ({
           ) : null}
 
           <div
-            className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:bg-gray-50 mt-4"
+            className="border-2 border-dashed border-gray-300 rounded-lg p-6 md:p-8 text-center cursor-pointer hover:bg-gray-50 mt-4"
             onClick={handleImageClick}
           >
-            <MdAdd className="text-3xl text-gray-400 mx-auto mb-2" />
-            <p className="text-gray-500">
+            <MdAdd className="text-2xl md:text-3xl text-gray-400 mx-auto mb-2" />
+            <p className="text-sm md:text-base text-gray-500">
               {isUploading ? "Uploading..." : "Click to upload images"}
             </p>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-xs md:text-sm text-gray-400 mt-1">
               You can select multiple images (first image will be used as primary)
             </p>
           </div>
@@ -256,25 +256,25 @@ const AddEditTravelStory = ({
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Story*</label>
           <textarea
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm md:text-base"
             placeholder="Tell your story here..."
-            rows={8}
+            rows={6}
             value={story}
             onChange={(e) => setStory(e.target.value)}
             required
           />
         </div>
 
-        <div className="flex justify-end gap-2 pt-4">
+        <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors order-2 sm:order-1"
           >
             Cancel
           </button>
           <button
             onClick={submitStory}
-            className="flex items-center gap-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="w-full sm:w-auto flex items-center justify-center gap-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors order-1 sm:order-2"
             disabled={isUploading}
           >
             {type === "add" ? (

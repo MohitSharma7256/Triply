@@ -297,36 +297,35 @@ const Home = () => {
       />
 
       {/* Enhanced Header Section */}
-      <motion.div 
-        className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16"
+      <motion.div
+        className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-8 md:py-16"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="relative container mx-auto px-6">
+        <div className="relative container mx-auto px-4 md:px-6">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-3 md:mb-4">
               Your Travel <span className="text-yellow-300">Stories</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+            <p className="text-base md:text-xl lg:text-2xl mb-6 md:mb-8 max-w-3xl mx-auto opacity-90">
               Capture, share, and relive your adventures around the world
             </p>
-            
-            {/* Interactive Search Bar */}
-            <motion.div 
-              className="max-w-md mx-auto relative"
+
+            {/* Interactive Search Bar - Hidden on mobile, shown in navbar */}
+            <motion.div
+              className="hidden md:block max-w-md mx-auto relative"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <div className={`relative flex items-center bg-white rounded-full shadow-lg transition-all duration-300 ${
-                isSearchFocused ? 'ring-2 ring-blue-400 shadow-xl' : ''
-              }`}>
+              <div className={`relative flex items-center bg-white rounded-full shadow-lg transition-all duration-300 ${isSearchFocused ? 'ring-2 ring-blue-400 shadow-xl' : ''
+                }`}>
                 <MdSearch className="absolute left-4 text-gray-400 text-xl" />
                 <input
                   type="text"
@@ -354,31 +353,31 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Floating Elements */}
+        {/* Floating Elements - Hidden on mobile */}
         <motion.div
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute top-10 left-10 text-3xl"
+          className="hidden md:block absolute top-10 left-10 text-2xl md:text-3xl"
         >
           ✈️
         </motion.div>
         <motion.div
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-          className="absolute top-20 right-20 text-2xl"
+          className="hidden md:block absolute top-20 right-20 text-xl md:text-2xl"
         >
           🌍
         </motion.div>
         <motion.div
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 20, repeat: Infinity }}
-          className="absolute bottom-10 left-1/4 text-xl"
+          className="hidden md:block absolute bottom-10 left-1/4 text-lg md:text-xl"
         >
           🗺️
         </motion.div>
       </motion.div>
 
-      <div className='container mx-auto py-10 px-6'>
+      <div className='container mx-auto py-6 md:py-10 px-4 md:px-6'>
         <FilterInfoTitle
           activeFilter={filterType}
           filterDate={selectedDate}
@@ -386,10 +385,10 @@ const Home = () => {
           onClear={resetFilters}
         />
 
-        <div className='flex gap-7'>
+        <div className='flex flex-col lg:flex-row gap-6 lg:gap-7'>
           <div className='flex-1'>
             {isLoading ? (
-              <motion.div 
+              <motion.div
                 className='text-center py-20'
                 variants={loadingVariants}
                 animate="animate"
@@ -398,8 +397,8 @@ const Home = () => {
                 <p className='text-gray-600 text-lg'>Loading your stories...</p>
               </motion.div>
             ) : allStories.length > 0 ? (
-              <motion.div 
-                className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+              <motion.div
+                className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -432,7 +431,7 @@ const Home = () => {
                 </AnimatePresence>
               </motion.div>
             ) : (
-              <motion.div 
+              <motion.div
                 className='text-center py-20'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -463,9 +462,9 @@ const Home = () => {
             )}
           </div>
 
-          {/* Enhanced Sidebar */}
+          {/* Enhanced Sidebar - Hidden on mobile */}
           <div className='hidden lg:block w-[320px]'>
-            <motion.div 
+            <motion.div
               className='bg-white border border-slate-200 shadow-xl shadow-slate-200/20 rounded-2xl sticky top-4 overflow-hidden'
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -582,7 +581,7 @@ const Home = () => {
       {/* Enhanced Floating Action Button */}
       {userInfo && (
         <motion.button
-          className='w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 fixed right-10 bottom-10 transition-all duration-300 shadow-2xl hover:shadow-3xl'
+          className='w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 fixed right-4 bottom-4 md:right-10 md:bottom-10 transition-all duration-300 shadow-2xl hover:shadow-3xl z-30'
           onClick={openAddStoryModal}
           aria-label="Add new travel story"
           title="Add new travel story"
@@ -592,12 +591,12 @@ const Home = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <MdAdd className="text-[32px] text-white" />
+          <MdAdd className="text-[28px] md:text-[32px] text-white" />
         </motion.button>
       )}
 
-      <ToastContainer 
-        position="top-right" 
+      <ToastContainer
+        position="top-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
